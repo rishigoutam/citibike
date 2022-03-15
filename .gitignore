@@ -188,8 +188,8 @@ ames-iowa.Rproj
 #################################################
 
 ## Data from https://s3.amazonaws.com/tripdata/index.html
-data/tripdata/*.csv
-data/tripdata/*.zip
+data/tripdata_csv/*.csv
+data/tripdata_zip/*.zip
 
 ## Excel
 *.xlsx
