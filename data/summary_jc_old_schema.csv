@@ -1,0 +1,911 @@
+,datetime,counttrips,meanduration,modestartstationid,modestartstationname,modestartstationlatitude,modestartstationlongitude,modeendstationid,modeendstationname,modeendstationlatitude,modeendstationlongitude,usertypevalues,gendervalues
+0,2015-09,6668,4313.320785842831,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    5292
+Customer      1376
+Name: usertype, dtype: int64","1    3944
+0    1380
+2    1344
+Name: gender, dtype: int64"
+1,2015-10,19264,1178.658741694352,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    16967
+Customer       2297
+Name: usertype, dtype: int64","1    12677
+2     4249
+0     2338
+Name: gender, dtype: int64"
+2,2015-11,15113,1122.8087739032621,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    13878
+Customer       1235
+Name: usertype, dtype: int64","1    10718
+2     3138
+0     1257
+Name: gender, dtype: int64"
+3,2015-12,11838,1274.5933434701808,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    11118
+Customer        720
+Name: usertype, dtype: int64","1    8735
+2    2363
+0     740
+Name: gender, dtype: int64"
+4,2016-01,7479,876.0839684449793,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    7177
+Customer       302
+Name: usertype, dtype: int64","1    5697
+2    1474
+0     308
+Name: gender, dtype: int64"
+5,2016-02,8250,1424.132,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    7920
+Customer       330
+Name: usertype, dtype: int64","1    6283
+2    1629
+0     338
+Name: gender, dtype: int64"
+6,2016-03,13511,2018.9951891051735,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    12609
+Customer        890
+Name: usertype, dtype: int64","1    9936
+2    2648
+0     927
+Name: gender, dtype: int64"
+7,2016-04,16342,910.6958756578142,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    14562
+Customer       1749
+Name: usertype, dtype: int64","1    11372
+2     3154
+0     1816
+Name: gender, dtype: int64"
+8,2016-05,19488,818.028222495895,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    17754
+Customer       1726
+Name: usertype, dtype: int64","1    13925
+2     3764
+0     1799
+Name: gender, dtype: int64"
+9,2016-06,23947,853.9833799640874,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    21883
+Customer       2060
+Name: usertype, dtype: int64","1    17023
+2     4716
+0     2208
+Name: gender, dtype: int64"
+10,2016-07,24436,819.059215910951,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    22478
+Customer       1952
+Name: usertype, dtype: int64","1    17321
+2     4848
+0     2267
+Name: gender, dtype: int64"
+11,2016-08,34149,795.9735570587718,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    31386
+Customer       2709
+Name: usertype, dtype: int64","1    23738
+2     6850
+0     3561
+Name: gender, dtype: int64"
+12,2016-09,33425,853.9890201944652,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    31368
+Customer       1932
+Name: usertype, dtype: int64","1    23363
+2     7215
+0     2847
+Name: gender, dtype: int64"
+13,2016-10,29611,672.7844719867617,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    28485
+Customer       1076
+Name: usertype, dtype: int64","1    21332
+2     6389
+0     1890
+Name: gender, dtype: int64"
+14,2016-11,21832,826.8641901795529,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    21192
+Customer        591
+Name: usertype, dtype: int64","1    15850
+2     4722
+0     1260
+Name: gender, dtype: int64"
+15,2016-12,15114,575.5315601429138,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    14869
+Customer        204
+Name: usertype, dtype: int64","1    11357
+2     3077
+0      680
+Name: gender, dtype: int64"
+16,2017-01,12926,577.770772087266,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    12827
+Customer         81
+Name: usertype, dtype: int64","1    10016
+2     2467
+0      443
+Name: gender, dtype: int64"
+17,2017-02,14026,609.7881790959647,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    13504
+Customer        456
+Name: usertype, dtype: int64","1    10422
+2     2711
+0      893
+Name: gender, dtype: int64"
+18,2017-03,12201,674.3556265879846,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    11975
+Customer        193
+Name: usertype, dtype: int64","1    9195
+2    2439
+0     567
+Name: gender, dtype: int64"
+19,2017-04,21186,920.9135278013782,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    19357
+Customer       1829
+Name: usertype, dtype: int64","1    15093
+2     4021
+0     2072
+Name: gender, dtype: int64"
+20,2017-05,25966,980.5476392205192,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    24325
+Customer       1641
+Name: usertype, dtype: int64","1    18611
+2     5320
+0     2035
+Name: gender, dtype: int64"
+21,2017-06,32060,860.6036182158452,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    30082
+Customer       1978
+Name: usertype, dtype: int64","1    22656
+2     6782
+0     2622
+Name: gender, dtype: int64"
+22,2017-07,33573,767.9523128704614,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    30945
+Customer       2628
+Name: usertype, dtype: int64","1    23331
+2     7163
+0     3079
+Name: gender, dtype: int64"
+23,2017-08,35472,842.6350360847993,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    33002
+Customer       2470
+Name: usertype, dtype: int64","1    25131
+2     7512
+0     2829
+Name: gender, dtype: int64"
+24,2017-09,33119,756.9020199885263,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    30986
+Customer       2133
+Name: usertype, dtype: int64","1    23364
+2     7209
+0     2546
+Name: gender, dtype: int64"
+25,2017-10,34919,595.2771843409032,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    33082
+Customer       1837
+Name: usertype, dtype: int64","1    24970
+2     7628
+0     2321
+Name: gender, dtype: int64"
+26,2017-11,23582,529.3732507844967,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    23023
+Customer        559
+Name: usertype, dtype: int64","1    17656
+2     4939
+0      987
+Name: gender, dtype: int64"
+27,2017-12,15898,460.83639451503336,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    15673
+Customer        225
+Name: usertype, dtype: int64","1    12264
+2     3103
+0      531
+Name: gender, dtype: int64"
+28,2018-01,12677,533.287291946044,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    12492
+Customer        185
+Name: usertype, dtype: int64","1    9798
+2    2451
+0     428
+Name: gender, dtype: int64"
+29,2018-02,15104,483.4630561440678,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    14915
+Customer        189
+Name: usertype, dtype: int64","1    11849
+2     2757
+0      498
+Name: gender, dtype: int64"
+30,2018-03,17109,536.356829738734,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    16673
+Customer        436
+Name: usertype, dtype: int64","1    13231
+2     3084
+0      794
+Name: gender, dtype: int64"
+31,2018-04,23634,669.2850977405433,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    21891
+Customer       1743
+Name: usertype, dtype: int64","1    17207
+2     4751
+0     1676
+Name: gender, dtype: int64"
+32,2018-05,34456,815.9512711864406,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    31998
+Customer       2458
+Name: usertype, dtype: int64","1    24839
+2     7078
+0     2539
+Name: gender, dtype: int64"
+33,2018-06,40937,766.0281163739404,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    37750
+Customer       3187
+Name: usertype, dtype: int64","1    28787
+2     9045
+0     3105
+Name: gender, dtype: int64"
+34,2018-07,42268,731.4779738809501,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    38474
+Customer       3794
+Name: usertype, dtype: int64","1    29463
+2     9457
+0     3348
+Name: gender, dtype: int64"
+35,2018-08,44432,697.9541771696075,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    41274
+Customer       3158
+Name: usertype, dtype: int64","1    31529
+2     9907
+0     2996
+Name: gender, dtype: int64"
+36,2018-09,39022,742.3754548716109,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    35498
+Customer       3524
+Name: usertype, dtype: int64","1    27790
+2     8458
+0     2774
+Name: gender, dtype: int64"
+37,2018-10,39138,589.9203587306454,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    37134
+Customer       2004
+Name: usertype, dtype: int64","1    28889
+2     8649
+0     1600
+Name: gender, dtype: int64"
+38,2018-11,24910,580.3265355279004,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    24012
+Customer        898
+Name: usertype, dtype: int64","1    18588
+2     5383
+0      939
+Name: gender, dtype: int64"
+39,2018-12,20205,561.0072259341747,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    19614
+Customer        591
+Name: usertype, dtype: int64","1    15161
+2     4325
+0      719
+Name: gender, dtype: int64"
+40,2019-01,19676,446.9328115470624,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    19267
+Customer        409
+Name: usertype, dtype: int64","1    14929
+2     4171
+0      576
+Name: gender, dtype: int64"
+41,2019-02,18565,605.3395636951252,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    18127
+Customer        438
+Name: usertype, dtype: int64","1    14334
+2     3636
+0      595
+Name: gender, dtype: int64"
+42,2019-03,23606,546.1763534694569,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    22529
+Customer       1077
+Name: usertype, dtype: int64","1    17811
+2     4750
+0     1045
+Name: gender, dtype: int64"
+43,2019-04,33056,713.9956740077445,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    30208
+Customer       2848
+Name: usertype, dtype: int64","1    23964
+2     6996
+0     2096
+Name: gender, dtype: int64"
+44,2019-05,36135,824.1199944652,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    32364
+Customer       3771
+Name: usertype, dtype: int64","1    25846
+2     7702
+0     2587
+Name: gender, dtype: int64"
+45,2019-06,39430,973.6899568856201,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    33661
+Customer       5769
+Name: usertype, dtype: int64","1    27182
+2     8911
+0     3337
+Name: gender, dtype: int64"
+46,2019-07,43746,812.114250445755,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    37495
+Customer       6251
+Name: usertype, dtype: int64","1    30411
+2     9875
+0     3460
+Name: gender, dtype: int64"
+47,2019-08,48711,782.8709942312825,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    41322
+Customer       7389
+Name: usertype, dtype: int64","1    33099
+2    11454
+0     4158
+Name: gender, dtype: int64"
+48,2019-09,49244,810.9518113881894,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    41856
+Customer       7388
+Name: usertype, dtype: int64","1    33417
+2    12049
+0     3778
+Name: gender, dtype: int64"
+49,2019-10,42253,569.2341608879843,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    38197
+Customer       4056
+Name: usertype, dtype: int64","1    29343
+2    10460
+0     2450
+Name: gender, dtype: int64"
+50,2019-11,30797,679.0835146280482,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    28403
+Customer       2394
+Name: usertype, dtype: int64","1    21768
+2     7534
+0     1495
+Name: gender, dtype: int64"
+51,2019-12,19728,540.7301297648013,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    18492
+Customer       1236
+Name: usertype, dtype: int64","1    14302
+2     4601
+0      825
+Name: gender, dtype: int64"
+52,2020-01,26020,540.8975403535742,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    24436
+Customer       1584
+Name: usertype, dtype: int64","1    18536
+2     6341
+0     1143
+Name: gender, dtype: int64"
+53,2020-02,22962,665.6929274453445,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    21453
+Customer       1509
+Name: usertype, dtype: int64","1    16464
+2     5499
+0      999
+Name: gender, dtype: int64"
+54,2020-03,17719,1384.5124442688639,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    15192
+Customer       2527
+Name: usertype, dtype: int64","1    12021
+2     4199
+0     1499
+Name: gender, dtype: int64"
+55,2020-04,9268,1803.6978851963747,"0    3199
+Name: startstationid, dtype: int64","0    Newport Pkwy
+Name: startstationname, dtype: object","0    40.728745
+Name: startstationlatitude, dtype: float64","0   -74.032108
+Name: startstationlongitude, dtype: float64","0    3199
+Name: endstationid, dtype: int64","0    Newport Pkwy
+Name: endstationname, dtype: object","0    40.728745
+Name: endstationlatitude, dtype: float64","0   -74.032108
+Name: endstationlongitude, dtype: float64","Subscriber    6692
+Customer      2576
+Name: usertype, dtype: int64","1    5709
+2    2202
+0    1357
+Name: gender, dtype: int64"
+56,2020-05,25077,2445.721138892212,"0    3192
+Name: startstationid, dtype: int64","0    Liberty Light Rail
+Name: startstationname, dtype: object","0    40.711242
+Name: startstationlatitude, dtype: float64","0   -74.055701
+Name: startstationlongitude, dtype: float64","0    3192
+Name: endstationid, dtype: int64","0    Liberty Light Rail
+Name: endstationname, dtype: object","0    40.711242
+Name: endstationlatitude, dtype: float64","0   -74.055701
+Name: endstationlongitude, dtype: float64","Subscriber    12952
+Customer      12125
+Name: usertype, dtype: int64","1    12765
+2     6757
+0     5555
+Name: gender, dtype: int64"
+57,2020-06,36921,2296.5872267815066,"0    3199
+Name: startstationid, dtype: int64","0    Newport Pkwy
+Name: startstationname, dtype: object","0    40.728745
+Name: startstationlatitude, dtype: float64","0   -74.032108
+Name: startstationlongitude, dtype: float64","0    3192
+Name: endstationid, dtype: int64","0    Liberty Light Rail
+Name: endstationname, dtype: object","0    40.711242
+Name: endstationlatitude, dtype: float64","0   -74.055701
+Name: endstationlongitude, dtype: float64","Subscriber    19825
+Customer      17096
+Name: usertype, dtype: int64","1    19181
+2     9826
+0     7914
+Name: gender, dtype: int64"
+58,2020-07,38680,1841.7221302998967,"0    3199
+Name: startstationid, dtype: int64","0    Newport Pkwy
+Name: startstationname, dtype: object","0    40.728745
+Name: startstationlatitude, dtype: float64","0   -74.032108
+Name: startstationlongitude, dtype: float64","0    3199
+Name: endstationid, dtype: int64","0    Newport Pkwy
+Name: endstationname, dtype: object","0    40.728745
+Name: endstationlatitude, dtype: float64","0   -74.032108
+Name: endstationlongitude, dtype: float64","Subscriber    23264
+Customer      15416
+Name: usertype, dtype: int64","1    20945
+2     9873
+0     7862
+Name: gender, dtype: int64"
+59,2020-08,43267,1712.3783483948505,"0    3199
+Name: startstationid, dtype: int64","0    Newport Pkwy
+Name: startstationname, dtype: object","0    40.728745
+Name: startstationlatitude, dtype: float64","0   -74.032108
+Name: startstationlongitude, dtype: float64","0    3199
+Name: endstationid, dtype: int64","0    Newport Pkwy
+Name: endstationname, dtype: object","0    40.728745
+Name: endstationlatitude, dtype: float64","0   -74.032108
+Name: endstationlongitude, dtype: float64","Subscriber    26328
+Customer      16939
+Name: usertype, dtype: int64","1    23870
+2    10881
+0     8516
+Name: gender, dtype: int64"
+60,2020-09,53833,1575.786004866903,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    35284
+Customer      18549
+Name: usertype, dtype: int64","1    31067
+2    13873
+0     8893
+Name: gender, dtype: int64"
+61,2020-10,30086,1246.2911320880144,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    21194
+Customer       8892
+Name: usertype, dtype: int64","1    18265
+2     7558
+0     4263
+Name: gender, dtype: int64"
+62,2020-11,21275,1398.3940305522915,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    15507
+Customer       5768
+Name: usertype, dtype: int64","1    13219
+2     5221
+0     2835
+Name: gender, dtype: int64"
+63,2020-12,11694,1387.734051650419,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    9404
+Customer      2290
+Name: usertype, dtype: int64","1    7765
+2    2568
+0    1361
+Name: gender, dtype: int64"
+64,2021-01,11624,985.1405712319339,"0    3186
+Name: startstationid, dtype: int64","0    Grove St PATH
+Name: startstationname, dtype: object","0    40.719586
+Name: startstationlatitude, dtype: float64","0   -74.043117
+Name: startstationlongitude, dtype: float64","0    3186
+Name: endstationid, dtype: int64","0    Grove St PATH
+Name: endstationname, dtype: object","0    40.719586
+Name: endstationlatitude, dtype: float64","0   -74.043117
+Name: endstationlongitude, dtype: float64","Subscriber    9648
+Customer      1976
+Name: usertype, dtype: int64","1    7809
+2    2610
+0    1205
+Name: gender, dtype: int64"
