@@ -196,3 +196,4 @@ data/tripdata_zip/*.zip
 ~$*.xlsx
 
 ## Additional Files
+data/NY_2019.csv
