@@ -91,10 +91,10 @@ data %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% diff(24) %>% diff(
 set <- data %>% count(hour) %>% ungroup() %>% select(n) %>% ts()
 d= 1
 DD= 2
-p_max= 4
-q_max=3 
-p_s_max=3
-q_s_max=3
+p_max= 2
+q_max= 7 
+p_s_max=2
+q_s_max=2
 per= 24
 for(p in 1:p_max){
   for(q in 1:q_max){
@@ -126,15 +126,21 @@ for(p in 1:p_max){
 
 
 
+
+
+
+
+
+
 #______________________________________________________________________Daily 
 
 #Daily Values keep the Noise in, but wayyy less noisy than hourly
 
 #Time-Series Analysis______________ Single Differenceing Looks good,  p looks like 2, q looks like 1 
-data %>% count(day) %>% ungroup() %>% select(n) %>% ts() %>% acf2(main='Hourly ACF, PCF')
+data %>% count(day) %>% ungroup() %>% select(n) %>% ts() %>% acf2(main='Daily ACF, PCF')
 #so we can see there is strong periodicity so we have to do some differencing
-data %>% count(day) %>% ungroup() %>% select(n) %>% ts() %>% diff(1) %>% acf2(main='1D, Hourly ACF, PCF')
-data %>% count(day) %>% ungroup() %>% select(n) %>% ts() %>% diff(1) %>% diff(1) %>% acf2(main='2D, Hourly ACF, PCF')
+data %>% count(day) %>% ungroup() %>% select(n) %>% ts() %>% diff(1) %>% acf2(main='1D, Daily ACF, PCF')
+data %>% count(day) %>% ungroup() %>% select(n) %>% ts() %>% diff(1) %>% diff(1) %>% acf2(main='2D, Daily ACF, PCF')
 #double diff is too much residue
 
 
@@ -194,7 +200,15 @@ autoplot(predict) +ylab("Rider Count") + labs(title ="Two-week SARIMA(1,1,1,0,1,
 sarima = arima(x=set, order = c(1,1,2), seasonal = list(order = c(1,1,1), period = per))
 predict = forecast(sarima, h=14, level = 85)
 autoplot(predict) +ylab("Rider Count") + labs(title ="Two-week SARIMA(1,1,2,1,1,1,7) Prediction for NYC Bike Demand") +
-  xlab("Days from Jan 1 2019")
+
+
+
+
+
+
+
+
+
 
 
 
@@ -206,9 +220,10 @@ autoplot(predict) +ylab("Rider Count") + labs(title ="Two-week SARIMA(1,1,2,1,1,
 
 #______________________________________________________________________Hourly, but with first week (Trying diff weeks 
 # gives us different workable sarimas, but two weeks together is too much noise)
-months <- data %>% filter(week(week) %in% c(1))
+months <- data %>% filter(week(week) %in% c(2))
 
 #Time-Series Analysis______________
+months %>% count(hour) %>% as_tsibble() %>% autoplot()
 months %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% plot.ts()
 months %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% acf2(main='Hourly ACF, PCF, Months')
 #so we can see there is strong periodicity so we have to do some differencing
@@ -270,7 +285,7 @@ for(p in 1:p_max){
     }
   }
 }
-#SARIMA( 1 1 0 2 1 24) AIC= 1888.498  SSE= 33526008  p-VALUE= 0.1447814 
+#SARIMA( 1 1 0 2 1 24) AIC= 1888.498  SSE= 33526008  p-VALUE= 0.1447814 for week 1 
 sarima = arima(x=set, order = c(1,1,0), seasonal = list(order = c(0,2,1), period = per))
 predict = forecast(sarima, h=12, level = 85)
 autoplot(predict) +ylab("Rider Count") + labs(title ="12-hour SARIMA(1,1,1,0,1,1,7) Prediction for NYC Bike Demand") +
@@ -279,6 +294,7 @@ autoplot(predict) +ylab("Rider Count") + labs(title ="12-hour SARIMA(1,1,1,0,1,1
 
 #SARIMA(0 1 1 2 2 2 24) AIC= 1888.536  SSE= 24349069  p-VALUE= 0.2653764 
 sarima = arima(x=set, order = c(0,1,1), seasonal = list(order = c(2,2,2), period = per))
-predict = forecast(sarima, h=24, level = 85)
+predict = forecast(sarima, h=12, level = 85)
 autoplot(predict) +ylab("Rider Count") + labs(title ="One-Day SARIMA(1,1,1,0,1,1,7) Prediction for NYC Bike Demand") +
   xlab("Hours from Jan 1 2019")
+
