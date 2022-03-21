@@ -191,6 +191,10 @@ ames-iowa.Rproj
 data/tripdata_csv/*/*.csv
 data/tripdata_zip/*.zip
 
+# Weather data
+data/**/*.tar.gz
+data/**/*.csv
+
 ## Excel
 *.xlsx
 ~$*.xlsx
