@@ -196,3 +196,89 @@ predict = forecast(sarima, h=14, level = 85)
 autoplot(predict) +ylab("Rider Count") + labs(title ="Two-week SARIMA(1,1,2,1,1,1,7) Prediction for NYC Bike Demand") +
   xlab("Days from Jan 1 2019")
 
+
+
+
+
+
+
+
+
+#______________________________________________________________________Hourly, but with first week (Trying diff weeks 
+# gives us different workable sarimas, but two weeks together is too much noise)
+months <- data %>% filter(week(week) %in% c(1))
+
+#Time-Series Analysis______________
+months %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% plot.ts()
+months %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% acf2(main='Hourly ACF, PCF, Months')
+#so we can see there is strong periodicity so we have to do some differencing
+months %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% diff(1) %>% acf2(main='1D, Hourly ACF, PCF')
+months %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% diff(1) %>% diff(1) %>% acf2(main='2D, Hourly ACF, PCF')
+
+#Ljung-Box Test we want p< .05
+d <- months %>% count(hour) %>% ungroup() %>% select(n) %>% ts()
+d.d <-months %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% diff(1)
+d.dd <-months %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% diff(1) %>% diff(1)
+d %>% Box.test(type="Ljung-Box", lag = log(length(d)))
+d.d %>% Box.test(type="Ljung-Box", lag = log(length(d.d)))
+d.dd %>% Box.test(type="Ljung-Box", lag = log(length(d.dd)))
+
+
+#Stick with single differencing
+
+#_________________________________________________________________________________SARIMA 
+#_seasonal differencing 
+months %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% diff(24) %>% plot.ts(main="Seasonal 24")
+months %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% diff(12) %>% plot.ts(main="Seasonal 12")
+months %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% diff(6) %>% plot.ts(main="Seasonal 6")
+
+months %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% diff(24) %>% acf2(main="1Diff 23  ACF/PACF Seasonal")
+
+
+months %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% diff(24) %>% 
+  acf2(main="1Diff 24 hr ACF/PACF Seasonal")
+months %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% diff(24) %>% diff(24) %>% 
+  acf2(main="2Diff 24 hr ACF/PACF Seasonal")
+
+
+#d = 1 , normal differencing
+#qmax = 2 , ACF gives us qmax
+#pmax = 2 , PACF gives us pmax
+
+#2ce differenced, 24 hr seasons, with q_max_seas= 3, p_max_seas = 3
+
+#_______________________________________SARIMA Full
+set <- months %>% count(hour) %>% ungroup() %>% select(n) %>% ts()
+d= 1
+DD= 2
+p_max= 1
+q_max=2 
+p_s_max=3
+q_s_max=3
+per= 24
+for(p in 1:p_max){
+  for(q in 1:q_max){
+    for(p_seasonal in 1:p_s_max){
+      for(q_seasonal in 1:q_s_max){
+        if(p+d+q+p_seasonal+DD+q_seasonal<=(p_max+q_max+p_s_max+q_s_max+d+DD)){
+          model<-arima(x=set, order = c((p-1),d,(q-1)), seasonal = list(order=c((p_seasonal-1),DD,(q_seasonal-1)), period=per))
+          pval<-Box.test(model$residuals, lag=log(length(model$residuals)))
+          sse<-sum(model$residuals^2)
+          cat(p-1,d,q-1,p_seasonal-1,DD,q_seasonal-1,per, 'AIC=', model$aic, ' SSE=',sse,' p-VALUE=', pval$p.value,'\n')
+        }
+      }
+    }
+  }
+}
+#SARIMA( 1 1 0 2 1 24) AIC= 1888.498  SSE= 33526008  p-VALUE= 0.1447814 
+sarima = arima(x=set, order = c(1,1,0), seasonal = list(order = c(0,2,1), period = per))
+predict = forecast(sarima, h=12, level = 85)
+autoplot(predict) +ylab("Rider Count") + labs(title ="12-hour SARIMA(1,1,1,0,1,1,7) Prediction for NYC Bike Demand") +
+  xlab("Hours from Jan 1 2019")
+
+
+#SARIMA(0 1 1 2 2 2 24) AIC= 1888.536  SSE= 24349069  p-VALUE= 0.2653764 
+sarima = arima(x=set, order = c(0,1,1), seasonal = list(order = c(2,2,2), period = per))
+predict = forecast(sarima, h=24, level = 85)
+autoplot(predict) +ylab("Rider Count") + labs(title ="One-Day SARIMA(1,1,1,0,1,1,7) Prediction for NYC Bike Demand") +
+  xlab("Hours from Jan 1 2019")
