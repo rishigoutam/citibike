@@ -12,6 +12,7 @@ library(cowplot)
 library(patchwork)
 # Preprocessing
 library(recipes)
+library(sjmisc)
 # Sampling / Accuracy
 library(rsample)
 library(yardstick) 
@@ -100,7 +101,7 @@ hourly %>%
 hourly %>% tidy_acf(2, lags = 0:max_lag) %>% 
   ggplot(aes(lag,acf)) + geom_segment(aes(xend = lag, yend = 0), color = palette_light()[[1]]) +
   geom_vline(xintercept = 24, size = 3, color = palette_light()[[2]]) +
-  annotate("text", label = "7 Day Mark", x = 30, y = 0.8, 
+  annotate("text", label = "1 Day Mark", x = 30, y = 0.8, 
            color = palette_light()[[2]], size = 6, hjust = 0) +
   theme_tq() +
   labs(title = "ACF")
@@ -189,7 +190,7 @@ plot_split <- function(split, expand_y_axis = TRUE, alpha = 1, size = 1, base_si
       y = "", x = ""
     ) +
     theme(legend.position = "none") 
- #Cannot get segmentation plot to work 
+ #Got segmentation plot to work 
   if (expand_y_axis) {
     
     hourly_time_summary <- hourly %>% 
@@ -247,4 +248,125 @@ rolling_origin_resamples %>%
                      title = "Backtesting Strategy: Zoomed In")
 
 
+
+
+
+
+
+
+
+#Using the keras Stateful LSTM Model 
+
+#first do model on one sample, then we scale model to other samples
+#this allows us to check if our model is even working at all
+#then crossvalidate it when applying it to the other years
+
+
+
+#_________________________________Single LSTM 
+split <-rolling_origin_resamples$splits[[12]]
+split_id <- rolling_origin_resamples$splits[[12]]
+
+plot_split(split, expand_y_axis = FALSE, size = 0.5) +
+  theme(legend.position = "bottom") +
+  ggtitle("Split")
+
+
+df_trn <- training(split)
+df_tst <- testing(split)
+
+
+#add column from sjmisc adds column to the end 
+df <- bind_rows( 
+  df_trn %>% add_column(key="training"), 
+  df_tst %>% add_columns(key='testing') 
+) %>%
+  as_tbl_time(index=hour) 
+
+
+
+
+
+#preprocessing--LSTM wants centered and normalized and scaled
+rec_obj <- recipe(n ~ ., df) %>% 
+  step_sqrt(n) %>% 
+  step_center(n) %>% 
+  step_scale(n) %>%
+  prep()
+
+df_processed_tbl <- bake(rec_obj, df) #counts are transformed
+
+#We record centering and scaling history in order to inver the 
+#centering and scaling transformations after the model
+center_history <- rec_obj$steps[[2]]$means["n"]
+scale_history  <- rec_obj$steps[[3]]$sds["n"]
+c("center" = center_history, "scale" = scale_history) #print histories
+
+
+
+#____lstm_____
+#model inputs: Batch splitting
+#
+lag_setting <- nrow(df_tst)
+batch_size <- 24 
+train_length <- nrow(df_trn)
+tsteps <- 1
+epochs <- 200
+
+
+#_____Tensorize inputs 
+# Training Set
+lag_train_tbl <- df_processed_tbl %>%
+  mutate(value_lag = lag(n, n = lag_setting)) %>%
+  filter(!is.na(value_lag)) %>%
+  filter(key == "training") %>%
+  tail(train_length)
+x_train_vec <- lag_train_tbl$value_lag
+x_train_arr <- array(data = x_train_vec, dim = c(length(x_train_vec), 1, 1))
+y_train_vec <- lag_train_tbl$n
+y_train_arr <- array(data = y_train_vec, dim = c(length(y_train_vec), 1))
+# Testing Set
+lag_test_tbl <- df_processed_tbl %>%
+  mutate(
+    value_lag = lag(n, n = lag_setting)
+  ) %>%
+  filter(!is.na(value_lag)) %>%
+  filter(key == "testing")
+x_test_vec <- lag_test_tbl$value_lag
+x_test_arr <- array(data = x_test_vec, dim = c(length(x_test_vec), 1, 1))
+y_test_vec <- lag_test_tbl$n
+y_test_arr <- array(data = y_test_vec, dim = c(length(y_test_vec), 1))
+
+
+#___________LSTM Model 
+model <- keras_model_sequential()
+model %>%
+  layer_lstm(units            = 50, 
+             input_shape      = c(tsteps, 1), 
+             batch_size       = batch_size,
+             return_sequences = TRUE, 
+             stateful         = TRUE) %>% 
+  layer_lstm(units            = 50, 
+             return_sequences = FALSE, 
+             stateful         = TRUE) %>% 
+  layer_dense(units = 1)
+model %>% 
+  compile(loss = 'mae', optimizer = 'adam')
+model
+
+
+
+#Fitting the model
+for (i in 1:epochs) {
+  model %>% fit(x          = x_train_arr, 
+                y          = y_train_arr, 
+                batch_size = batch_size,
+                epochs     = 1, 
+                verbose    = 1, 
+                shuffle    = FALSE)
+  
+  model %>% reset_states()
+  cat("Epoch: ", i)
+  
+}
 
