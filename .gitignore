@@ -192,7 +192,8 @@ data/tripdata_csv/*/*.csv
 data/tripdata_zip/*.zip
 
 # Weather data
-data/**/*.tar.gz
+data/weather/*.tar.gz
+data/weather/**/72505394728.csv
 
 ## Excel files
 *.xlsx
