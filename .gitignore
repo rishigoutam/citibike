@@ -187,17 +187,16 @@ ames-iowa.Rproj
 
 #################################################
 
-## Data from https://s3.amazonaws.com/tripdata/index.html
+## Citibike Trips data
 data/tripdata_csv/*/*.csv
 data/tripdata_zip/*.zip
 
 # Weather data
 data/**/*.tar.gz
-data/**/*.csv
 
-## Excel
+## Excel files
 *.xlsx
 ~$*.xlsx
 
-## Additional Files
+## Additional files
 data/NY_2019.csv
