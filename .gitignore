@@ -200,6 +200,10 @@ data/tripdata_zip/*
 data/tripdata_csv/*
 data/tripdata_parquet/*
 
+# Stations data
+# ignore all 20XX.parquet files, but commit stations.parquet
+data/stations/2*.parquet
+
 ## Excel files
 *.xlsx
 ~$*.xlsx
