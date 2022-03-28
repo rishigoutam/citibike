@@ -8,6 +8,7 @@ CSV_EXTENSION = ".csv"
 PNG_EXTENSION = ".png"
 HTML_EXTENSION = ".html"
 GEOJSON_EXTENSION = ".geojson"
+SHAPEFILE_EXTENSION = ".shp"
 
 TRIPS_COLUMNS = [
     "tripduration",
