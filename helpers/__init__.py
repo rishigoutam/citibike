@@ -7,6 +7,7 @@ PARQUET_EXTENSION = ".parquet"
 CSV_EXTENSION = ".csv"
 PNG_EXTENSION = ".png"
 HTML_EXTENSION = ".html"
+GEOJSON_EXTENSION = ".geojson"
 
 TRIPS_COLUMNS = [
     "tripduration",
