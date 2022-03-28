@@ -5,6 +5,9 @@ import logging
 
 PARQUET_EXTENSION = ".parquet"
 CSV_EXTENSION = ".csv"
+PNG_EXTENSION = ".png"
+HTML_EXTENSION = ".html"
+
 TRIPS_COLUMNS = [
     "tripduration",
     "starttime",
