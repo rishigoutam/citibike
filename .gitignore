@@ -208,5 +208,8 @@ data/stations/2*.parquet
 *.xlsx
 ~$*.xlsx
 
+## Secrets
+.mapbox_token
+
 ## Additional files
 data/NY_2019.csv
