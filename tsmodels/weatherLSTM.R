@@ -87,7 +87,7 @@ p2 <- weather %>% filter_time("start" ~ "2019-01")  %>%  ggplot(aes(DATE,PRCP)) 
   geom_smooth(method = "loess", span = 0.2, se = FALSE) +
   theme_tq() +
   labs(
-    title = "2019 Percipitation"
+    title = "Jan 2019 Percipitation"
   )
 
 n2/t2/p2
@@ -127,6 +127,7 @@ n2/t2/p2
 colnames(weather)[1] <- "day"
 daily <- full_join(daily,weather)
 
+daily
 
 #Backtesting
 #In time series, we want to preserve the time component
@@ -223,7 +224,7 @@ plot_split <- function(split, expand_y_axis = TRUE, alpha = 1, size = 1, base_si
 }
 
 
-rolling_origin_resamples$splits[[3]] %>%
+rolling_origin_resamples$splits[[2]] %>%
   plot_split(expand_y_axis = TRUE) +
   theme(legend.position = "bottom")
 
@@ -316,6 +317,7 @@ rec_obj <- recipe(n ~ ., df) %>%
 df_processed_tbl <- bake(rec_obj, df) #counts are transformed
 df_processed_tbl
 
+
 #We record centering and scaling history in order to inver the 
 #centering and scaling transformations after the model
 center_history <- rec_obj$steps[[2]]$means["n"]
@@ -323,10 +325,27 @@ scale_history  <- rec_obj$steps[[3]]$sds["n"]
 c("center" = center_history, "scale" = scale_history) #print histories
 
 
+
+
+n1 <- df_processed_tbl %>% ggplot() + geom_line(aes(day, n)) +
+  geom_line(aes(day, TAVG_F, color='red',  alpha=.7)) +
+  geom_line(aes(day, PRCP, color='blue', alpha=.7)) +
+  theme_tq() +
+  labs(
+    title = "Slice11 Counts"
+  )
+
+
+n1
+
+
+
+
+
 #____lstm_____
 #model inputs: Batch splitting
 #
-lag_setting <- nrow(df_tst) #Prediction Window (How Far Ahead are we predicting, 
+lag_setting <- 7 #Prediction Window (How Far Ahead are we predicting, 
 #thats a week)
 batch_size <- 24  #Batch size is the period giving best autocorr
 #since 168 doesn't divide 24*24 (train window) evenly,
@@ -350,17 +369,31 @@ epochs <- 300 #need to adjust this number later based on bias/variance tradeoff
 #_____Tensorize inputs 
 # Training Set
 lag_train_tbl <- df_processed_tbl %>%
-  mutate(value_lag = lag(n, n = lag_setting), p_lag = lag(PRCP, n = lag_setting), t_lag = lag(TAVG_F, n = lag_setting) ) %>%
-  filter(!is.na(value_lag)) %>% #drop the lookback period
+  mutate(value_lag_1 = lag(n, n = lag_setting-6),
+         value_lag_2 = lag(n, n = lag_setting-5), p_lag_1 = lag(PRCP, n = lag_setting-6), t_lag_1 = lag(TAVG_F, n=lag_setting-6), 
+         value_lag_3 = lag(n, n = lag_setting-4), p_lag_2 = lag(PRCP, n = lag_setting-5), t_lag_2 = lag(TAVG_F, n=lag_setting-5), 
+         value_lag_4 = lag(n, n = lag_setting-3), p_lag_3 = lag(PRCP, n = lag_setting-4), t_lag_3 = lag(TAVG_F, n=lag_setting-4), 
+         value_lag_5 = lag(n, n = lag_setting-2), p_lag_4 = lag(PRCP, n = lag_setting-3), t_lag_4 = lag(TAVG_F, n=lag_setting-3), 
+         value_lag_6 = lag(n, n = lag_setting-1), p_lag_5 = lag(PRCP, n = lag_setting-2), t_lag_5 = lag(TAVG_F, n=lag_setting-2), 
+         value_lag_7 = lag(n, n = lag_setting-0), p_lag_6 = lag(PRCP, n = lag_setting-1), t_lag_6 = lag(TAVG_F, n=lag_setting-1)) %>%
+  filter(!is.na(value_lag_7)) %>% #drop the lookback period
   filter(key == "training") %>%
   tail(train_length)
 lag_train_tbl 
 
-#This is the critical part, 7 identical columns, 17 rows for the obs, 3 layers one for each parameter
-#x_train_vec1 <- lag_train_tbl$value_lag
-#x_train_arr_layer1 <- array(data = x_train_vec, dim = c(length(x_train_vec1), tsteps, 1))
+#Tensor shape is (num obs, num timesteps, num predictors)
+#in our case we have 17 observations, 7 timesteps, and 3 variables
+
+x_train <- lag_train_tbl %>% select(!c(day,key,n))
+x_train_vec <- c(x_train$value_lag_1, x_train$value_lag_2, x_train$value_lag_3, x_train$value_lag_4, x_train$value_lag_5, x_train$value_lag_6, x_train$value_lag_7, 
+                 x_train$PRCP, x_train$p_lag_1, x_train$p_lag_2, x_train$p_lag_3, x_train$p_lag_4, x_train$p_lag_5, x_train$p_lag_6, 
+                 x_train$TAVG_F, x_train$t_lag_1, x_train$t_lag_2, x_train$t_lag_3, x_train$t_lag_4, x_train$t_lag_5, x_train$t_lag_6) 
+
+x_train_arr <- array(data = x_train_vec, dim = c(17, tsteps, 3))
 y_train_vec <- lag_train_tbl$n
 y_train_arr <- array(data = y_train_vec, dim = c(length(y_train_vec), 1))
+
+
 # Testing Set
 lag_test_tbl <- df_processed_tbl %>%
   mutate(

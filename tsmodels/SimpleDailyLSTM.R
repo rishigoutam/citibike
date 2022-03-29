@@ -290,7 +290,7 @@ c("center" = center_history, "scale" = scale_history) #print histories
 #model inputs: Batch splitting
 #
 lag_setting <- nrow(df_tst) #Prediction Window (How Far Ahead are we predicting, 
-#thats a week)
+#thats a week) Highest Autocorrelation value
 batch_size <- 12  #Batch size is the period giving best autocorr
 #gcf()
 
@@ -313,6 +313,8 @@ x_train_vec <- lag_train_tbl$value_lag
 x_train_arr <- array(data = x_train_vec, dim = c(length(x_train_vec), tsteps, 1))
 y_train_vec <- lag_train_tbl$n
 y_train_arr <- array(data = y_train_vec, dim = c(length(y_train_vec), 1))
+
+
 # Testing Set
 lag_test_tbl <- df_processed_tbl %>%
   mutate(
