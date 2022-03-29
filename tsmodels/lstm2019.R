@@ -137,7 +137,7 @@ optimal_lag_setting
 
 periods_train <- 24*24 #train 24 days
 periods_test <- 24*7 #test 7 days
-skip_span <- 24*30 #skip 14 days 
+skip_span <- 24*30 #skip 30 days 
 
 rolling_origin_resamples <- rolling_origin(
   hourly,
