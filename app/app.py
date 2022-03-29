@@ -47,7 +47,7 @@ topstations_watercolor_iframe = html.Div(
 
 with open(ASSETS_DIR + "topstations-heatmap" + helpers.HTML_EXTENSION) as f:
     text = f.read()
-heatmap_iframe = html.Div(
+heatmap_toner_iframe = html.Div(
     children=[
         html.Iframe(
             srcDoc=text,
@@ -95,7 +95,7 @@ def render_content(tab):
     elif tab == "tab-2":
         return topstations_toner_iframe
     elif tab == "tab-3":
-        return heatmap_iframe
+        return heatmap_watercolor_iframe
 
 
 app.run_server(debug=False, use_reloader=False)
