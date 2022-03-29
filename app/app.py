@@ -7,7 +7,7 @@ from dash.dependencies import Input, Output
 
 import sys
 
-sys.path.insert(0, "..")  # NOTE: this might be a level deeper
+sys.path.insert(0, "..")
 import helpers
 
 ASSETS_DIR = "./assets/"
