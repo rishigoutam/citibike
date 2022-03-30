@@ -14,6 +14,7 @@ import helpers
 ASSETS_DIR = "./assets/"
 
 # styles
+title_style = {"padding-left": "1.5em"}
 iframe_style = {"height": "600px", "width": "100%"}
 # fixed sidebar on left. NOTE: hacky CSS widths
 SIDEBAR_STYLE = {
@@ -30,6 +31,31 @@ CONTENT_STYLE = {
     "margin-left": "110px",
 }
 
+# create home page
+home_page = dbc.Container([html.P("Coming soon!")])
+
+
+# create slides page
+with open(ASSETS_DIR + "google-slides" + helpers.HTML_EXTENSION) as f:
+    text = f.read()
+google_slides_iframe = html.Div(children=[html.Iframe(srcDoc=text, style=iframe_style)])
+slides_page = dbc.Container(
+    [
+        html.H1("NYC Data Science Academy Capstone", style=title_style),
+        html.H3(
+            "Predicting Citi Bike Trip Demand and Analysis of Station Re-balancing",
+            style=title_style,
+        ),
+        google_slides_iframe,
+        html.H4(
+            "Rishi Goutam, James Goudreault, Srikar Pamidi, March 31 2022",
+            style=title_style,
+        ),
+    ]
+)
+
+
+# create maps page
 # create iframes reading raw html from asset
 with open(ASSETS_DIR + "allstations" + helpers.HTML_EXTENSION) as f:
     text = f.read()
@@ -63,20 +89,21 @@ heatmap_watercolor_iframe = html.Div(
 # app
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.SOLAR])
 
-# app sidebar
+# app side navbar with router links
 sidebar = html.Div(
     [
-        html.H3("Citibike", className="display-4"),
+        html.H3("Citi Bike", className="display-4"),
         html.Hr(),
         html.P(
-            "Improving operations through trip demand prediction and dock station rebalancing analysis",
-            className="lead",
+            "Improving operations through trip demand prediction and dock station rebalancing analysis"
         ),
         dbc.Nav(
             [
-                dbc.NavLink("Home", href="/", active="exact"),
-                dbc.NavLink("Demand for trips", href="/page-1", active="exact"),
-                dbc.NavLink("Rebalance analysis", href="/page-2", active="exact"),
+                dbc.NavLink("About Citi Bike", href="/", active="exact"),
+                dbc.NavLink("Presentation", href="/slides", active="exact"),
+                dbc.NavLink("Interactive analysis", href="/maps", active="exact"),
+                dbc.NavLink("Future Development", href="/wip", active="exact"),
+                dbc.NavLink("Contact", href="/contact", active="exact"),
             ],
             vertical=True,
             pills=True,
@@ -87,9 +114,8 @@ sidebar = html.Div(
 
 # app content
 content = dbc.Container(id="page-content", style=CONTENT_STYLE)
-maps_content = dbc.Container(
+maps_page = dbc.Container(
     [
-        dcc.Store(id="store"),
         html.Div(id="blank-output"),
         dbc.Tabs(
             [
@@ -103,6 +129,7 @@ maps_content = dbc.Container(
         html.Div(id="tab-content"),
     ],
 )
+
 # app layout
 app.layout = dbc.Container([dcc.Location(id="url"), sidebar, content])
 
@@ -129,7 +156,7 @@ app.clientside_callback(
     """
     function(active_tab) {
         if (active_tab === 'tab-1') {
-            document.title = 'Citibike Station Heatmap'
+            document.title = 'Citi Bike Station Heatmap'
         } else if (active_tab === 'tab-2') {
             document.title = 'Station Information'
         } else if (active_tab === 'tab-3') {
@@ -146,21 +173,27 @@ app.clientside_callback(
 @app.callback(Output("page-content", "children"), [Input("url", "pathname")])
 def render_page_content(pathname):
     if pathname == "/":
-        return html.P("Coming soon!")
-    elif pathname == "/page-1":
-        return html.P("Coming soon!")
-    elif pathname == "/page-2":
-        return maps_content
-    # If the user tries to reach a different page, return a 404 message
-    return dbc.Jumbotron(
-        [
-            html.H1("404: Not found", className="text-danger"),
-            html.Hr(),
-            html.P(f"The pathname {pathname} was not recognised..."),
-        ]
-    )
+        return home_page
+    elif pathname == "/slides":
+        return slides_page
+        # return html.P("Coming soon!")
+    elif pathname == "/maps":
+        return maps_page
+    elif pathname == "/wip":
+        return home_page
+    elif pathname == "/contact":
+        return home_page
+    else:
+        # If the user tries to reach a different page, return a 404 message
+        return dbc.Alert(
+            [
+                html.H1("404: Not found", className="text-danger"),
+                html.Hr(),
+                html.P(f"The pathname {pathname} was not recognised..."),
+            ]
+        )
 
 
-app.run_server(debug=True, use_reloader=False, port=8052)
+app.run_server(debug=True, use_reloader=False, port=8054)
 
 # %%
