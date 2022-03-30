@@ -56,8 +56,8 @@ app.layout = html.Div(
             value="tab-1",
             children=[
                 dcc.Tab(label="Station Distribution", value="tab-1", style=tab_style),
-                dcc.Tab(label="Station Information", value="tab-3", style=tab_style),
-                dcc.Tab(label="Top Rebalance Routes", value="tab-2", style=tab_style),
+                dcc.Tab(label="Station Information", value="tab-2", style=tab_style),
+                dcc.Tab(label="Top Rebalance Routes", value="tab-3", style=tab_style),
             ],
         ),
         html.Div(id="tabs-toplevel-children"),
@@ -73,9 +73,9 @@ def render_content(tab):
     if tab == "tab-1":
         return heatmap_watercolor_iframe
     elif tab == "tab-2":
-        return topstations_toner_iframe
-    elif tab == "tab-3":
         return allstations_iframe
+    elif tab == "tab-3":
+        return topstations_toner_iframe
 
 
 # change title
