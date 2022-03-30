@@ -583,10 +583,10 @@ predict_keras_lstm <- function(split, epochs = 300, ...) {
     tail(train_length)
   lag_train_tbl 
 
-  x_train <- lag_train_tbl %>% select(!c(day,key,n))
+  x_train <- lag_train_tbl %>% select(!c(day,key,n, PRCP, TAVG_F))
   x_train_vec <- c(x_train$value_lag_1, x_train$value_lag_2, x_train$value_lag_3, x_train$value_lag_4, x_train$value_lag_5, x_train$value_lag_6, x_train$value_lag_7, 
-                   x_train$PRCP, x_train$p_lag_1, x_train$p_lag_2, x_train$p_lag_3, x_train$p_lag_4, x_train$p_lag_5, x_train$p_lag_6, 
-                   x_train$TAVG_F, x_train$t_lag_1, x_train$t_lag_2, x_train$t_lag_3, x_train$t_lag_4, x_train$t_lag_5, x_train$t_lag_6) 
+                   x_train$p_lag_1, x_train$p_lag_2, x_train$p_lag_3, x_train$p_lag_4, x_train$p_lag_5, x_train$p_lag_6, x_train$p_lag_7, 
+                   x_train$p_lag_1, x_train$t_lag_2, x_train$t_lag_3, x_train$t_lag_4, x_train$t_lag_5, x_train$t_lag_6, x_train$t_lag_7) 
   
   x_train_arr <- array(data = x_train_vec, dim = c(17, tsteps, 3))
   y_train_vec <- lag_train_tbl$n
@@ -602,13 +602,13 @@ predict_keras_lstm <- function(split, epochs = 300, ...) {
            value_lag_5 = lag(n, n = lag_setting-2), p_lag_4 = lag(PRCP, n = lag_setting-3), t_lag_4 = lag(TAVG_F, n=lag_setting-3), 
            value_lag_6 = lag(n, n = lag_setting-1), p_lag_5 = lag(PRCP, n = lag_setting-2), t_lag_5 = lag(TAVG_F, n=lag_setting-2), 
            value_lag_7 = lag(n, n = lag_setting-0), p_lag_6 = lag(PRCP, n = lag_setting-1), t_lag_6 = lag(TAVG_F, n=lag_setting-1)) %>%
-    filter(!is.na(value_lag_7)) %>% #drop the lookback period
+    filter(!is.na(value_lag_7)) %>% #drop the lookback period, because of this we really have 17 observations
     filter(key == "testing")
   
-  xtest <- lag_test_tbl %>% select(!c(day,key,n))
-  x_test_vec <- c(xtest$value_lag_1, xtest$value_lag_2, xtest$value_lag_3, xtest$value_lag_4, xtest$value_lag_5, xtest$value_lag_6, xtest$value_lag_7, 
-                  xtest$PRCP, xtest$p_lag_1, xtest$p_lag_2, xtest$p_lag_3, xtest$p_lag_4, xtest$p_lag_5, xtest$p_lag_6, 
-                  xtest$TAVG_F, xtest$t_lag_1, xtest$t_lag_2, xtest$t_lag_3, xtest$t_lag_4, xtest$t_lag_5, xtest$t_lag_6) 
+  xtest <- lag_test_tbl %>% select(!c(day,key,n, PRCP, TAVG_F))
+  x_test_vec <- c(x_train$value_lag_1, x_train$value_lag_2, x_train$value_lag_3, x_train$value_lag_4, x_train$value_lag_5, x_train$value_lag_6, x_train$value_lag_7, 
+                  x_train$p_lag_1, x_train$p_lag_2, x_train$p_lag_3, x_train$p_lag_4, x_train$p_lag_5, x_train$p_lag_6, x_train$p_lag_7, 
+                  x_train$p_lag_1, x_train$t_lag_2, x_train$t_lag_3, x_train$t_lag_4, x_train$t_lag_5, x_train$t_lag_6, x_train$t_lag_7) 
   
   x_test_arr <- array(data = x_test_vec, dim = c(7, tsteps, 3))
   y_test_vec <- lag_test_tbl$n
@@ -689,7 +689,7 @@ predict_keras_lstm <- function(split, epochs = 300, ...) {
 #PREDICTING OVER EVERYTHING
 #Use prediction function over all rolling origin slices
 sample_predictions_lstm_tbl <- rolling_origin_resamples %>%
-  mutate(predict = map(splits, predict_keras_lstm, epochs = 150))
+  mutate(predict = map(splits, predict_keras_lstm, epochs = 300))
 
 sample_predictions_lstm_tbl
 
@@ -781,7 +781,7 @@ sample_predictions_lstm_tbl %>%
 
 
 
-
+#build a two day lagged model and see
 
 
 
