@@ -4,6 +4,7 @@ import dash
 from dash import html
 from dash import dcc
 from dash.dependencies import Input, Output
+import dash_bootstrap_components as dbc
 
 import sys
 
@@ -13,7 +14,6 @@ import helpers
 ASSETS_DIR = "./assets/"
 
 # styles
-tab_style = {"line-height": "3vh"}
 iframe_style = {"height": "600px", "width": "100%"}
 
 # create iframes reading raw html from asset
@@ -47,54 +47,58 @@ heatmap_watercolor_iframe = html.Div(
 )
 
 # app
-app = dash.Dash(__name__)
-app.layout = html.Div(
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.SOLAR])
+app.layout = dbc.Container(
     [
+        dcc.Store(id="store"),
         html.Div(id="blank-output"),
-        dcc.Tabs(
-            id="tabs-toplevel",
-            value="tab-1",
-            children=[
-                dcc.Tab(label="Station Distribution", value="tab-1", style=tab_style),
-                dcc.Tab(label="Station Information", value="tab-2", style=tab_style),
-                dcc.Tab(label="Top Rebalance Routes", value="tab-3", style=tab_style),
+        dbc.Tabs(
+            [
+                dbc.Tab(label="Station Distribution", tab_id="tab-1"),
+                dbc.Tab(label="Station Information", tab_id="tab-2"),
+                dbc.Tab(label="Top Rebalance Routes", tab_id="tab-3"),
             ],
+            id="tabs",
+            active_tab="tab-1",
         ),
-        html.Div(id="tabs-toplevel-children"),
+        html.Div(id="tab-content"),
     ]
 )
 
 
 @app.callback(
-    Output("tabs-toplevel-children", "children"),
-    Input("tabs-toplevel", "value"),
+    Output("tab-content", "children"),
+    Input("tabs", "active_tab"),
 )
-def render_content(tab):
-    if tab == "tab-1":
-        return heatmap_watercolor_iframe
-    elif tab == "tab-2":
-        return allstations_iframe
-    elif tab == "tab-3":
-        return topstations_toner_iframe
+def render_tab_content(active_tab):
+    if active_tab:
+        if active_tab == "tab-1":
+            return heatmap_watercolor_iframe
+        elif active_tab == "tab-2":
+            return allstations_iframe
+        elif active_tab == "tab-3":
+            return topstations_toner_iframe
+    else:
+        return "No tab selected"
 
 
 # change title
 app.clientside_callback(
     """
-    function(tab_value) {
-        if (tab_value === 'tab-1') {
+    function(active_tab) {
+        if (active_tab === 'tab-1') {
             document.title = 'Citibike Station Heatmap'
-        } else if (tab_value === 'tab-2') {
+        } else if (active_tab === 'tab-2') {
             document.title = 'Station Information'
-        } else if (tab_value === 'tab-3') {
+        } else if (active_tab === 'tab-3') {
             document.title = 'Top Routes by Rebalance Counts'
         }
     }
     """,
     Output("blank-output", "children"),
-    Input("tabs-toplevel", "value"),
+    Input("tabs", "active_tab"),
 )
 
-app.run_server(debug=False, use_reloader=False, port=8051)
+app.run_server(debug=True, use_reloader=False, port=8051)
 
 # %%
