@@ -20,7 +20,8 @@ SIDEBAR_STYLE = {
     "bottom": 0,
     "width": "220px",
     "padding": "1rem .5rem",
-    "background-color": "#f8f9fa",
+    # "background-color": "#f8f9fa",
+    "background-image": "linear-gradient(rgba(255, 255, 255, 1), rgba(0, 0, 0, 0)), url('./assets/sidebar-background.png')",
 }
 # styles for the main content to position it to right of sidebar
 CONTENT_STYLE = {
@@ -287,6 +288,7 @@ sidebar = html.Div(
 # app layout
 content = dbc.Container(id="page-content", style=CONTENT_STYLE)
 app.layout = dbc.Container([dcc.Location(id="url"), sidebar, content])
+app.title = "Citi Bike Operations Analysis"
 
 
 # tab callback
@@ -304,24 +306,6 @@ def render_tab_content(active_tab):
             return topstations_toner_iframe
     else:
         return "No tab selected"
-
-
-# document title tab callback
-app.clientside_callback(
-    """
-    function(active_tab) {
-        if (active_tab === 'tab-1') {
-            document.title = 'Citi Bike Station Heatmap'
-        } else if (active_tab === 'tab-2') {
-            document.title = 'Station Information'
-        } else if (active_tab === 'tab-3') {
-            document.title = 'Top Routes by Rebalance Counts'
-        }
-    }
-    """,
-    Output("blank-output", "children"),
-    Input("tabs", "active_tab"),
-)
 
 
 # sidebar navigation callback
@@ -348,6 +332,35 @@ def render_page_content(pathname):
             ]
         )
 
+
+# document title callback
+app.clientside_callback(
+    """
+    function(active_tab, pathname) {
+        console.log(pathname)
+        if (pathname === '/') {
+            document.title = 'Citi Bike Operational Analysis'
+            return pathname
+        } else if (pathname === '/slides') {
+            document.title = 'Our Presentation'
+        } else if (pathname === '/wip') {
+            document.title = 'Citi Bike WIP'
+        } else if (pathname === '/contact') {
+            document.title = 'Contact the team!'
+        } else if (pathname === '/maps') {
+            if (active_tab === 'tab-3') {
+                document.title = 'Top Routes by Rebalance Counts'
+            } else if (active_tab === 'tab-1') {
+                document.title = 'Citi Bike Station Heatmap'
+            } else if (active_tab === 'tab-2') {
+                document.title = 'Station Information'
+            }
+        }
+    }
+    """,
+    Output("blank-output", "children"),
+    [Input("tabs", "active_tab"), Input("url", "pathname")],
+)
 
 app.run_server(debug=False, use_reloader=False, port=8054)
 
