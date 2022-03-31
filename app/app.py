@@ -36,7 +36,29 @@ def spacer():
 
 
 # create home page
-home_page = dbc.Container([html.P("Coming soon!")])
+home_page = dbc.Container(
+    dbc.Col(
+        [
+            spacer(),
+            spacer(),
+            spacer(),
+            html.H2("Citi Bike - Predicting and Inducing Demand"),
+            # dbc.Row([
+            #     html.Div(html.Img(src="./assets/demographics/pie-gender.png"), style={"overflow": "hidden", "height": "220px"}),
+            #     html.Div(html.Img(src="./assets/demographics/pie-usertype.png"), style={"overflow": "hidden", "height": "220px"}),
+            # ], style={"display": "flex", "flex-direction": "col"}),
+            html.H4("Trip demand is influenced by seasonality and weather"),
+            html.P(
+                "Citi bike trips show several patterns. Demand varies depending on time (of year, day of week, time of day), temperature, and precipitation. Predicting these variations is important as Citi Bike needs to have enough bikes out to meet demand for better customer experience. Also, in leaner months, it needs to take bikes in for storage to avoid wear and tear on bikes."
+            ),
+            html.H4("Rebalancing induces demand by increasing supply"),
+            html.P(
+                "By bringing bikes to where they are needed, there is a virtuous cycle of demand generation, leading to increasingly satisfied customers. Through our exploratory data analysis, we shall see how Citi Bike uses rebalancing techniques such as paid employees as well as volunteers to rebalance bikes."
+            ),
+        ],
+        style={"width": "800px"},
+    )
+)
 
 # create slides page
 with open(ASSETS_DIR + "google-slides" + helpers.HTML_EXTENSION) as f:
@@ -91,6 +113,9 @@ heatmap_watercolor_iframe = html.Div(
 maps_page = dbc.Container(
     [
         html.Div(id="blank-output"),
+        spacer(),
+        spacer(),
+        spacer(),
         dbc.Tabs(
             [
                 dbc.Tab(label="Station Distribution", tab_id="tab-1"),
