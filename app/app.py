@@ -14,8 +14,7 @@ import helpers
 ASSETS_DIR = "./assets/"
 
 # styles
-title_style = {"padding-left": "1.5em"}
-iframe_style = {"height": "600px", "width": "100%"}
+iframe_style = {"height": "700px", "width": "100%"}
 # fixed sidebar on left. NOTE: hacky CSS widths
 SIDEBAR_STYLE = {
     "position": "fixed",
@@ -31,29 +30,32 @@ CONTENT_STYLE = {
     "margin-left": "110px",
 }
 
+
+def spacer():
+    return html.H4("")
+
+
 # create home page
 home_page = dbc.Container([html.P("Coming soon!")])
-
 
 # create slides page
 with open(ASSETS_DIR + "google-slides" + helpers.HTML_EXTENSION) as f:
     text = f.read()
 google_slides_iframe = html.Div(children=[html.Iframe(srcDoc=text, style=iframe_style)])
 slides_page = dbc.Container(
-    [
-        html.H1("NYC Data Science Academy Capstone", style=title_style),
-        html.H3(
-            "Predicting Citi Bike Trip Demand and Analysis of Station Re-balancing",
-            style=title_style,
-        ),
-        google_slides_iframe,
-        html.H4(
-            "Rishi Goutam, James Goudreault, Srikar Pamidi, March 31 2022",
-            style=title_style,
-        ),
-    ]
+    dbc.Col(
+        [
+            html.H1("NYC Data Science Academy Capstone"),
+            html.H3(
+                "Predicting Citi Bike Trip Demand and Analysis of Station Re-balancing",
+            ),
+            google_slides_iframe,
+            html.H4(
+                "Rishi Goutam, James Goudreault, Srikar Pamidi, March 31 2022",
+            ),
+        ]
+    )
 )
-
 
 # create maps page
 # create iframes reading raw html from asset
@@ -86,6 +88,145 @@ heatmap_watercolor_iframe = html.Div(
     children=[html.Iframe(srcDoc=text, style=iframe_style)]
 )
 
+maps_page = dbc.Container(
+    [
+        html.Div(id="blank-output"),
+        dbc.Tabs(
+            [
+                dbc.Tab(label="Station Distribution", tab_id="tab-1"),
+                dbc.Tab(label="Station Information", tab_id="tab-2"),
+                dbc.Tab(label="Top Rebalance Routes", tab_id="tab-3"),
+            ],
+            id="tabs",
+            active_tab="tab-1",
+        ),
+        html.Div(id="tab-content"),
+    ],
+)
+
+# create wip page
+wip_page = dbc.Container(
+    dbc.Col(
+        [
+            spacer(),
+            html.H3("Work in Progress..."),
+            spacer(),
+            spacer(),
+            spacer(),
+            spacer(),
+            dbc.Label("Team Checklist"),
+            spacer(),
+            dbc.Checklist(
+                options=[
+                    {"label": "Convert CSV to parquet", "value": 1},
+                    {"label": "Conduct exploratory data analysis", "value": 2},
+                    {
+                        "label": "Create SARIMA model for trip demand predictions based on seasons",
+                        "value": 3,
+                    },
+                    {
+                        "label": "Create LSTM model for seasonal + weather-based trip predictions",
+                        "value": 4,
+                    },
+                    {
+                        "label": "Create LSTM model for dock station capacity prediction",
+                        "value": 5,
+                    },
+                    {"label": "Read real-time Citi Bike GBFS feed", "value": 6},
+                    {"label": "Host this Dash application", "value": 7},
+                ],
+                value=[1, 2, 3, 4],
+                id="checklist-input",
+            ),
+            spacer(),
+            spacer(),
+            dbc.Progress(value=80, animated=True, striped=True),
+        ]
+    )
+)
+
+
+# create contact page
+def create_card(
+    filename: str,
+    fullname: str,
+    description: str,
+    github_url: str,
+    linkedin_url: str,
+    email_address: str,
+):
+    return dbc.Card(
+        [
+            dbc.CardImg(src=ASSETS_DIR + filename + helpers.PNG_EXTENSION, top=True),
+            dbc.CardBody(
+                [
+                    html.H4(fullname, className="card-title"),
+                    html.P(
+                        description,
+                        className="card-text",
+                    ),
+                    dbc.ButtonGroup(
+                        [
+                            dbc.Button("GitHub", color="primary", href=github_url),
+                            dbc.Button("LinkedIn", color="primary", href=linkedin_url),
+                            dbc.Button(
+                                "Email", color="primary", href="mailto:" + email_address
+                            ),
+                        ]
+                    ),
+                ]
+            ),
+        ],
+        style={"width": "18rem"},
+    )
+
+
+card_rishi = create_card(
+    filename="rishi",
+    fullname="Rishi Goutam",
+    description="I am a data scientist with a computer science and business background. I love creating maps!",
+    github_url="github.com/rishigoutam/",
+    linkedin_url="linkedin.com/in/rishigoutam/,",
+    email_address="rishi@goutam.org",
+)
+card_james = create_card(
+    filename="james",
+    fullname="James Goudreault",
+    description="I have a background in engineering and operations. I like climbing big mountains!",
+    github_url="github.com/gitjgoud/",
+    linkedin_url="linkedin.com/in/james-goudreault/",
+    email_address="",
+)
+card_srikar = create_card(
+    filename="srikar",
+    fullname="Srikar Pamidimukkala",
+    description="I am a mathematician, student, lifelong learner. I love diving deep into ML algorithms and time series.",
+    github_url="github.com/SacredFisher/",
+    linkedin_url="linkedin.com/in/srikar-pamidi/",
+    email_address="",
+)
+contact_page = dbc.Container(
+    [
+        dbc.Col(
+            [
+                spacer(),
+                spacer(),
+                spacer(),
+                dbc.Row(html.H3("The Team"), align="end"),
+                dbc.Row(
+                    html.H4("Please feel free to reach out or view our portfolios"),
+                    align="end",
+                ),
+                spacer(),
+                dbc.Row(
+                    [dbc.Col(card_rishi), dbc.Col(card_james), dbc.Col(card_srikar)],
+                    align="start",
+                ),
+            ]
+        )
+    ]
+)
+
 # app
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.SOLAR])
 
@@ -112,25 +253,8 @@ sidebar = html.Div(
     style=SIDEBAR_STYLE,
 )
 
-# app content
-content = dbc.Container(id="page-content", style=CONTENT_STYLE)
-maps_page = dbc.Container(
-    [
-        html.Div(id="blank-output"),
-        dbc.Tabs(
-            [
-                dbc.Tab(label="Station Distribution", tab_id="tab-1"),
-                dbc.Tab(label="Station Information", tab_id="tab-2"),
-                dbc.Tab(label="Top Rebalance Routes", tab_id="tab-3"),
-            ],
-            id="tabs",
-            active_tab="tab-1",
-        ),
-        html.Div(id="tab-content"),
-    ],
-)
-
 # app layout
+content = dbc.Container(id="page-content", style=CONTENT_STYLE)
 app.layout = dbc.Container([dcc.Location(id="url"), sidebar, content])
 
 
@@ -180,9 +304,9 @@ def render_page_content(pathname):
     elif pathname == "/maps":
         return maps_page
     elif pathname == "/wip":
-        return home_page
+        return wip_page
     elif pathname == "/contact":
-        return home_page
+        return contact_page
     else:
         # If the user tries to reach a different page, return a 404 message
         return dbc.Alert(
