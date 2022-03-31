@@ -306,7 +306,7 @@ def render_tab_content(active_tab):
         return "No tab selected"
 
 
-# document title callback
+# document title tab callback
 app.clientside_callback(
     """
     function(active_tab) {
@@ -349,6 +349,6 @@ def render_page_content(pathname):
         )
 
 
-app.run_server(debug=True, use_reloader=False, port=8054)
+app.run_server(debug=False, use_reloader=False, port=8054)
 
 # %%
