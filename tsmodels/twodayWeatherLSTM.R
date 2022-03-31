@@ -273,6 +273,7 @@ rolling_origin_resamples %>%
 
 
 #Using the keras Stateful LSTM Model 
+#Using the keras Stateful LSTM Model 
 
 #first do model on one sample, then we scale model to other samples
 #this allows us to check if our model is even working at all
@@ -488,6 +489,8 @@ rolling_origin_resamples %>%
 # ret
 
 
+
+
 calc_rmse <- function(prediction_tbl) {
   
   rmse_calculation <- function(data) {
@@ -511,16 +514,6 @@ calc_rmse <- function(prediction_tbl) {
 
 #gives us the rmse of single sample test. 
 #however, note that this doesnt really show us anything. 
-#calc_rmse(ret)
-
-
-
-#this is natively saved to something else, so internal functions
-#get confused. 
-
-# ret %>% 
-# plot_prediction(id_s = split_id, alpha = 0.65) +
-# theme(legend.position = "bottom")
 
 
 #Make Prediction function
@@ -554,63 +547,53 @@ predict_keras_lstm <- function(split, epochs = 300, ...) {
   
   df_processed_tbl <- bake(rec_obj, df) #counts are transformed
   df_processed_tbl
-
+  
   center_history <- rec_obj$steps[[2]]$means["n"]
   scale_history  <- rec_obj$steps[[3]]$sds["n"]
-
+  
   #____lstm_Plan____
   #model inputs: Batch splitting
   #
-  lag_setting <- 7 
-  batch_size <- 1  
+  lag_setting <- 2 
+  batch_size <- 1  # we have train length is 22
   train_length <- nrow(df_trn) 
-  tsteps <- 7
+  tsteps <- 2
   epochs <- epochs 
   
   
   #_____Tensorize Train Test 
   # Training Set
   lag_train_tbl <- df_processed_tbl %>%
-    mutate(value_lag_1 = lag(n, n = lag_setting-6),
-           value_lag_2 = lag(n, n = lag_setting-5), p_lag_1 = lag(PRCP, n = lag_setting-6), t_lag_1 = lag(TAVG_F, n=lag_setting-6), 
-           value_lag_3 = lag(n, n = lag_setting-4), p_lag_2 = lag(PRCP, n = lag_setting-5), t_lag_2 = lag(TAVG_F, n=lag_setting-5), 
-           value_lag_4 = lag(n, n = lag_setting-3), p_lag_3 = lag(PRCP, n = lag_setting-4), t_lag_3 = lag(TAVG_F, n=lag_setting-4), 
-           value_lag_5 = lag(n, n = lag_setting-2), p_lag_4 = lag(PRCP, n = lag_setting-3), t_lag_4 = lag(TAVG_F, n=lag_setting-3), 
-           value_lag_6 = lag(n, n = lag_setting-1), p_lag_5 = lag(PRCP, n = lag_setting-2), t_lag_5 = lag(TAVG_F, n=lag_setting-2), 
-           value_lag_7 = lag(n, n = lag_setting-0), p_lag_6 = lag(PRCP, n = lag_setting-1), t_lag_6 = lag(TAVG_F, n=lag_setting-1),
-           p_lag_7 = lag(PRCP, n = lag_setting-0), t_lag_7 = lag(TAVG_F, n=lag_setting-0)) %>%
-    filter(!is.na(value_lag_7)) %>% #drop the lookback period
+    mutate(value_lag_1 = lag(n, n = lag_setting-1),
+           value_lag_2 = lag(n, n = lag_setting), p_lag_1 = lag(PRCP, n = lag_setting-1), t_lag_1 = lag(TAVG_F, n=lag_setting-1), 
+           p_lag_2 = lag(PRCP, n = lag_setting), t_lag_2 = lag(TAVG_F, n=lag_setting))  %>%
+    filter(!is.na(value_lag_2)) %>% #drop the lookback period
     filter(key == "training") %>%
     tail(train_length)
   lag_train_tbl 
-
-  x_train <- lag_train_tbl %>% select(!c(day,key,n, PRCP, TAVG_F))
-  x_train_vec <- c(x_train$value_lag_1, x_train$value_lag_2, x_train$value_lag_3, x_train$value_lag_4, x_train$value_lag_5, x_train$value_lag_6, x_train$value_lag_7, 
-                   x_train$p_lag_1, x_train$p_lag_2, x_train$p_lag_3, x_train$p_lag_4, x_train$p_lag_5, x_train$p_lag_6, x_train$p_lag_7, 
-                   x_train$t_lag_1, x_train$t_lag_2, x_train$t_lag_3, x_train$t_lag_4, x_train$t_lag_5, x_train$t_lag_6, x_train$t_lag_7) 
   
-  x_train_arr <- array(data = x_train_vec, dim = c(17, tsteps, 3))
+  x_train <- lag_train_tbl %>% select(!c(day,key,n, PRCP, TAVG_F))
+  x_train_vec <- c(x_train$value_lag_1, x_train$value_lag_2, 
+                   x_train$p_lag_1, x_train$p_lag_2, 
+                   x_train$t_lag_1, x_train$t_lag_2) 
+  
+  x_train_arr <- array(data = x_train_vec, dim = c(22, tsteps, 3))
   y_train_vec <- lag_train_tbl$n
   y_train_arr <- array(data = y_train_vec, dim = c(length(y_train_vec), 1))
   
   
   # Testing Set
   lag_test_tbl <- df_processed_tbl %>%
-    mutate(value_lag_1 = lag(n, n = lag_setting-6),
-           value_lag_2 = lag(n, n = lag_setting-5), p_lag_1 = lag(PRCP, n = lag_setting-6), t_lag_1 = lag(TAVG_F, n=lag_setting-6), 
-           value_lag_3 = lag(n, n = lag_setting-4), p_lag_2 = lag(PRCP, n = lag_setting-5), t_lag_2 = lag(TAVG_F, n=lag_setting-5), 
-           value_lag_4 = lag(n, n = lag_setting-3), p_lag_3 = lag(PRCP, n = lag_setting-4), t_lag_3 = lag(TAVG_F, n=lag_setting-4), 
-           value_lag_5 = lag(n, n = lag_setting-2), p_lag_4 = lag(PRCP, n = lag_setting-3), t_lag_4 = lag(TAVG_F, n=lag_setting-3), 
-           value_lag_6 = lag(n, n = lag_setting-1), p_lag_5 = lag(PRCP, n = lag_setting-2), t_lag_5 = lag(TAVG_F, n=lag_setting-2), 
-           value_lag_7 = lag(n, n = lag_setting-0), p_lag_6 = lag(PRCP, n = lag_setting-1), t_lag_6 = lag(TAVG_F, n=lag_setting-1),
-           p_lag_7 = lag(PRCP, n = lag_setting-0), t_lag_7 = lag(TAVG_F, n=lag_setting-0)) %>%
-    filter(!is.na(value_lag_7)) %>% #drop the lookback period, because of this we really have 17 observations
+    mutate(value_lag_1 = lag(n, n = lag_setting-1),
+           value_lag_2 = lag(n, n = lag_setting), p_lag_1 = lag(PRCP, n = lag_setting-1), t_lag_1 = lag(TAVG_F, n=lag_setting-1), 
+           p_lag_2 = lag(PRCP, n = lag_setting), t_lag_2 = lag(TAVG_F, n=lag_setting))  %>%
+    filter(!is.na(value_lag_2)) %>% #drop the lookback period
     filter(key == "testing")
   
   xtest <- lag_test_tbl %>% select(!c(day,key,n, PRCP, TAVG_F))
-  x_test_vec <- c(xtest$value_lag_1, xtest$value_lag_2, xtest$value_lag_3, xtest$value_lag_4, xtest$value_lag_5, xtest$value_lag_6, xtest$value_lag_7, 
-                  xtest$p_lag_1, xtest$p_lag_2, xtest$p_lag_3, xtest$p_lag_4, xtest$p_lag_5, xtest$p_lag_6, xtest$p_lag_7, 
-                  xtest$t_lag_1, xtest$t_lag_2, xtest$t_lag_3, xtest$t_lag_4, xtest$t_lag_5, xtest$t_lag_6, xtest$t_lag_7) 
+  x_test_vec <- c(xtest$value_lag_1, xtest$value_lag_2, 
+                  xtest$p_lag_1, xtest$p_lag_2, 
+                  xtest$t_lag_1, xtest$t_lag_2) 
   
   x_test_arr <- array(data = x_test_vec, dim = c(7, tsteps, 3))
   y_test_vec <- lag_test_tbl$n
@@ -698,7 +681,7 @@ sample_predictions_lstm_tbl
 #RMSE over All Slices
 sample_rmse_tbl <- sample_predictions_lstm_tbl %>%
   mutate(rmse = map_dbl(predict, calc_rmse)) %>%
-    select(id, rmse)
+  select(id, rmse)
 sample_rmse_tbl
 
 
@@ -718,19 +701,19 @@ sample_rmse_tbl %>%
 #summary of Error 
 
 plot_prediction <- function(data, id_s, alpha = 1, size = 2, base_size = 14) {
-    rmse_val <- sample_rmse_tbl %>% filter(id == id_s) 
-    rmse_valr <- rmse_val$rmse
-    g <- data %>%
-      ggplot(aes(index, value, color = key)) +
-      geom_line(alpha = alpha, size = size) + 
-      theme_tq(base_size = base_size) +
-      scale_color_tq() +
-      theme(legend.position = "none") +
-      labs(
+  rmse_val <- sample_rmse_tbl %>% filter(id == id_s) 
+  rmse_valr <- rmse_val$rmse
+  g <- data %>%
+    ggplot(aes(index, value, color = key)) +
+    geom_line(alpha = alpha, size = size) + 
+    theme_tq(base_size = base_size) +
+    scale_color_tq() +
+    theme(legend.position = "none") +
+    labs(
       title = glue("{id_s}, RMSE: {round(rmse_valr, digits = 1)}"),
       x = "", y = "")
-    
-      return(g)
+  
+  return(g)
   
 }
 
@@ -771,169 +754,3 @@ plot_predictions <- function(sampling_tbl, predictions_col,
 sample_predictions_lstm_tbl %>%
   plot_predictions(predictions_col = predict, alpha = 0.7, size = 1, base_size = 10,
                    title = "Keras Stateful LSTM: Backtested Predictions")
-
-
-
-
-
-
-
-
-
-
-
-
-#build a two day lagged model and see, may be overaccounting for the previous days rain and weather
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-predict_keras_lstm_future <- function(fulldata = daily, epochs = 300, ...) {
-  
-  #Data Setup (modified)
-  df <- fulldata
-  
-  
-  #Preprocessing
-  rec_obj <- recipe(n ~ ., df) %>% 
-    step_sqrt(n) %>% 
-    step_center(n) %>% 
-    step_scale(n) %>%
-    step_sqrt(PRCP) %>% 
-    step_center(PRCP) %>% 
-    step_scale(PRCP) %>%
-    step_sqrt(TAVG_F) %>% 
-    step_center(TAVG_F) %>% 
-    step_scale(TAVG_F) %>%
-    prep()
-  
-  df_processed_tbl <- bake(rec_obj, df) #counts are transformed
-  df_processed_tbl
-  
-  center_history <- rec_obj$steps[[2]]$means["n"]
-  scale_history  <- rec_obj$steps[[3]]$sds["n"]
-  
-  #____lstm_Plan____
-  #model inputs: Batch splitting
-  #
-  lag_setting <- 7 
-  batch_size <- 1  
-  train_length <- 24 
-  tsteps <- 7
-  epochs <- epochs 
-  
-  
-  #_____Tensorize Train Test 
-  # Training on All Year
-  lag_train_tbl <- df_processed_tbl %>%
-    mutate(value_lag_1 = lag(n, n = lag_setting-6),
-           value_lag_2 = lag(n, n = lag_setting-5), p_lag_1 = lag(PRCP, n = lag_setting-6), t_lag_1 = lag(TAVG_F, n=lag_setting-6), 
-           value_lag_3 = lag(n, n = lag_setting-4), p_lag_2 = lag(PRCP, n = lag_setting-5), t_lag_2 = lag(TAVG_F, n=lag_setting-5), 
-           value_lag_4 = lag(n, n = lag_setting-3), p_lag_3 = lag(PRCP, n = lag_setting-4), t_lag_3 = lag(TAVG_F, n=lag_setting-4), 
-           value_lag_5 = lag(n, n = lag_setting-2), p_lag_4 = lag(PRCP, n = lag_setting-3), t_lag_4 = lag(TAVG_F, n=lag_setting-3), 
-           value_lag_6 = lag(n, n = lag_setting-1), p_lag_5 = lag(PRCP, n = lag_setting-2), t_lag_5 = lag(TAVG_F, n=lag_setting-2), 
-           value_lag_7 = lag(n, n = lag_setting-0), p_lag_6 = lag(PRCP, n = lag_setting-1), t_lag_6 = lag(TAVG_F, n=lag_setting-1),
-           p_lag_7 = lag(PRCP, n = lag_setting-1), t_lag_7 = lag(TAVG_F, n=lag_setting-1)) %>%
-    filter(!is.na(value_lag_7)) %>% #drop the lookback period
-    tail(train_length)
-  lag_train_tbl 
-  
-  x_train <- lag_train_tbl %>% select(!c(day,n,PRCP, TAVG_F))
-  x_train_vec <- c(x_train$value_lag_1, x_train$value_lag_2, x_train$value_lag_3, x_train$value_lag_4, x_train$value_lag_5, x_train$value_lag_6, x_train$value_lag_7, 
-                   x_train$p_lag_1, x_train$p_lag_2, x_train$p_lag_3, x_train$p_lag_4, x_train$p_lag_5, x_train$p_lag_6, x_train$p_lag_7,
-                   x_train$t_lag_1, x_train$t_lag_2, x_train$t_lag_3, x_train$t_lag_4, x_train$t_lag_5, x_train$t_lag_6, x_train$t_lag_7) 
-  
-  x_train_arr <- array(data = x_train_vec, dim = c(24, tsteps, 3))
-  y_train_vec <- lag_train_tbl$n
-  y_train_arr <- array(data = y_train_vec, dim = c(length(y_train_vec), 1))
-  
-  
-  # Testing
-  x_test_vec <- y_train_vec %>% tail(lag_setting)
-  x_test_arr <- array(data = x_test_vec, dim = c(length(x_test_vec), tsteps, 3))
-  
-  #___________LSTM Model Creation  
-  model <- keras_model_sequential()
-  model %>%
-    layer_lstm(units            = 50, 
-               input_shape      = c(tsteps, 3), 
-               batch_size       = batch_size,
-               return_sequences = TRUE, 
-               stateful         = TRUE) %>% 
-    layer_lstm(units            = 50, 
-               return_sequences = FALSE, 
-               stateful         = TRUE) %>% 
-    layer_dense(units = 1)
-  model %>% 
-    compile(loss = 'mae', optimizer = optimizer_rmsprop())
-  #we use mean absolute error as our loss function since it is most robust to outliers
-  #there are lots of outliers in our data. 
-  
-  #___________LSTM Model Fitting
-  for (i in 1:epochs) {
-    hist <- model %>% fit(x          = x_train_arr, 
-                          y          = y_train_arr, 
-                          batch_size = batch_size,
-                          epochs     = 1, 
-                          verbose    = 1,
-                          shuffle    = FALSE)
-    model %>% reset_states()
-    cat("Epoch: ", i)
-    
-  }
-  
-  
-  #Predicting Using the 12-day LSTM Model
-  #x_test_arr, is our entire test-set tensor(with all the observations)
-  #using scale_history and center_history, we retransform and square the output
-  #to get the the final true count value 
-  
-  # Make Predictions
-  pred_out <- model %>% 
-    predict(x_test_arr, batch_size = batch_size) %>%
-    .[,1] 
-  # Retransform values
-  pred_tbl <- tibble(
-    index   = lag_train_tbl%>%tail(lag_setting) %>%.$day,
-    value   = (pred_out * scale_history + center_history)^2
-  ) 
-  # Combine actual data with predictions
-  tbl_1 <- df_trn %>% select(!c(PRCP,TAVG_F)) %>% 
-    add_column(key = "actual")
-  tbl_1 <-tbl_1 %>% rename(index=day,value=n)
-  tbl_2 <- df_tst %>% select(!c(PRCP,TAVG_F)) %>% 
-    add_column(key = "actual")
-  tbl_2 <- tbl_2 %>% rename(index=day,value=n)
-  tbl_3 <- pred_tbl %>%
-    add_column(key = "predict")
-  # Create time_bind_rows() to solve dplyr issue
-  time_bind_rows <- function(data_1, data_2, index) {
-    index_expr <- enquo(index)
-    bind_rows(data_1, data_2) %>%
-      as_tbl_time(index = !! index_expr)
-  }
-  ret <- list(tbl_1, tbl_2, tbl_3) %>%
-    reduce(time_bind_rows, index = index) %>%
-    arrange(key, index) %>%
-    mutate(key = as_factor(key))
-  
-  return(ret)
-}
-
-future_trips_tbl<- predict_keras_lstm_future(daily, epochs = 200)
-
-future_trips_tbl %>%
-  filter_time("2019-01" ~ "end") %>%
-  plot_prediction(id = NULL, alpha = 0.4, size = 1.5) +
-  theme(legend.position = "bottom") +
-  ggtitle("Sunspots: 1 Week Forecast", subtitle = "Forecast Horizon: Next Week")

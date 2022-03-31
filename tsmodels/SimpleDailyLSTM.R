@@ -13,6 +13,7 @@ library(lubridate)
 # Visualization
 library(cowplot)
 library(patchwork)
+library(gganimate)
 # Preprocessing
 library(recipes)
 library(sjmisc)
@@ -70,7 +71,7 @@ p1/ p2 / p3
 # is beyond 7 days. 
 
 #We check if autocrrelation is significant ourside of 7 days
-daily %>% select(n) %>% acf()
+daily %>% select(n) %>% acf() 
 #From the acf function we see that it is 
 
 #We want to get the autocorrelation data itself
@@ -183,17 +184,28 @@ plot_split <- function(split, expand_y_axis = TRUE, alpha = 1, size = 1, base_si
       tk_index()  %>% 
       tk_get_timeseries_summary()
     
-    g <- g + scale_x_date(date_labels = "%b-%d-%Y")
+    g <- g + scale_x_date(date_labels = "%b-%d-%Y", limits = c(daily_time_summary$start, daily_time_summary$end))
       
       #scale_x_datetime( limits = c(daily_time_summary$start, daily_time_summary$end))
   }
   
+  
+  
   return(g)
 }
+
 
 rolling_origin_resamples$splits[[1]] %>%
   plot_split(expand_y_axis = TRUE) +
   theme(legend.position = "bottom")
+
+
+
+
+
+
+
+
 
 
 # Plotting function that scales to all splits 
