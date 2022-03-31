@@ -1,11 +1,8 @@
-import os
-
 import dash
 from dash import html
 from dash import dcc
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
-
 import sys
 
 sys.path.insert(0, "..")
@@ -43,17 +40,26 @@ home_page = dbc.Container(
             spacer(),
             spacer(),
             html.H2("Citi Bike - Predicting and Inducing Demand"),
-            # dbc.Row([
-            #     html.Div(html.Img(src="./assets/demographics/pie-gender.png"), style={"overflow": "hidden", "height": "220px"}),
-            #     html.Div(html.Img(src="./assets/demographics/pie-usertype.png"), style={"overflow": "hidden", "height": "220px"}),
-            # ], style={"display": "flex", "flex-direction": "col"}),
+            html.H4("Strong growth since 2013 launch"),
+            spacer(),
+            html.P(
+                html.Img(src="./assets/temporal/growth.png"),
+                style={"overflow": "hidden", "background-color": "white"},
+            ),
+            spacer(),
             html.H4("Trip demand is influenced by seasonality and weather"),
             html.P(
                 "Citi bike trips show several patterns. Demand varies depending on time (of year, day of week, time of day), temperature, and precipitation. Predicting these variations is important as Citi Bike needs to have enough bikes out to meet demand for better customer experience. Also, in leaner months, it needs to take bikes in for storage to avoid wear and tear on bikes."
             ),
+            spacer(),
             html.H4("Rebalancing induces demand by increasing supply"),
             html.P(
                 "By bringing bikes to where they are needed, there is a virtuous cycle of demand generation, leading to increasingly satisfied customers. Through our exploratory data analysis, we shall see how Citi Bike uses rebalancing techniques such as paid employees as well as volunteers to rebalance bikes."
+            ),
+            spacer(),
+            html.P(
+                html.Img(src="./assets/weather/temperature.png"),
+                style={"background-color": "white", "overflow": "hidden"},
             ),
         ],
         style={"width": "800px"},
@@ -261,11 +267,11 @@ sidebar = html.Div(
         html.H3("Citi Bike", className="display-4"),
         html.Hr(),
         html.P(
-            "Improving operations through trip demand prediction and dock station rebalancing analysis"
+            "Improving Citi Bike operations through trip demand prediction and dock station rebalancing analysis"
         ),
         dbc.Nav(
             [
-                dbc.NavLink("About Citi Bike", href="/", active="exact"),
+                dbc.NavLink("Introduction", href="/", active="exact"),
                 dbc.NavLink("Presentation", href="/slides", active="exact"),
                 dbc.NavLink("Interactive analysis", href="/maps", active="exact"),
                 dbc.NavLink("Future Development", href="/wip", active="exact"),
