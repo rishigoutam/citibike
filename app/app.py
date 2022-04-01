@@ -164,15 +164,18 @@ wip_page = dbc.Container(
                         "label": "Create LSTM model for dock station capacity prediction",
                         "value": 5,
                     },
-                    {"label": "Read real-time Citi Bike GBFS feed", "value": 6},
-                    {"label": "Host this Dash application", "value": 7},
+                    {"label": "Read/use real-time Citi Bike GBFS feed for real-time predictions", "value": 6},
+                    {"label": "Unsupervised clustering of stations by rebalancing patterns", "value": 7},
+                    {"label": "Add click-event to show top station pairs when clicking a station", "value": 8},
+                    {"label": "Neighboor- and boro-level grouping and analysis of trips and rebalancing", "value": 9},
+                    {"label": "Host this Dash application", "value": 10},
                 ],
                 value=[1, 2, 3, 4],
                 id="checklist-input",
             ),
             spacer(),
             spacer(),
-            dbc.Progress(value=80, animated=True, striped=True),
+            dbc.Progress(value=80, label="80%", animated=True, striped=True),
         ]
     )
 )
