@@ -203,7 +203,7 @@ plot_split <- function(split, expand_y_axis = TRUE, alpha = 1, size = 1, base_si
   return(g)
 }
 
-rolling_origin_resamples$splits[[3]] %>%
+rolling_origin_resamples$splits[[1]] %>%
   plot_split(expand_y_axis = TRUE) +
   theme(legend.position = "bottom")
 
@@ -264,8 +264,8 @@ rolling_origin_resamples %>%
 
 
 #_________________________________Single LSTM 
-split <-rolling_origin_resamples$splits[[12]]
-split_id <- rolling_origin_resamples$id[[12]]
+split <-rolling_origin_resamples$splits[[3]]
+split_id <- rolling_origin_resamples$id[[3]]
 
 plot_split(split, expand_y_axis = FALSE, size = 0.5) +
   theme(legend.position = "bottom") +
@@ -462,7 +462,7 @@ plot_prediction <- function(data, id_s, alpha = 1, size = 2, base_size = 14) {
   
   g <- data %>%
     ggplot(aes(index, value, color = key)) +
-    geom_point(alpha = alpha, size = size) + 
+    geom_line(alpha = alpha, size = size) + 
     theme_tq(base_size = base_size) +
     scale_color_tq() +
     theme(legend.position = "none") +
@@ -623,6 +623,8 @@ predict_keras_lstm <- function(split, epochs = 300, ...){
       reduce(time_bind_rows, index = index) %>%
       arrange(key, index) %>%
       mutate(key = as_factor(key))
+    
+
     return(ret)
     
   }
@@ -633,7 +635,11 @@ predict_keras_lstm <- function(split, epochs = 300, ...){
   
 }
 
-predict_keras_lstm(split, epochs = 300)
+ret <- predict_keras_lstm(split, epochs = 300)
+
+ret %>% 
+  plot_prediction(id_s = split_id, alpha = 0.65) +
+  theme(legend.position = "bottom")
 
 
 
@@ -682,14 +688,14 @@ plot_predictions <- function(sampling_tbl, predictions_col,
 }
 
 #Backtest Predictions Plot
-sample_predictions_lstm_tbl %>%
+sample_predictions_lstm_tbl$splits %>%
   plot_predictions(predictions_col = predict, alpha = 0.5, size = 1, base_size = 10,
                    title = "Keras Stateful LSTM: Backtested Predictions")
 
 
 
 
-
+sample_predictions_lstm_tbl$splits %>% 
 
 
 

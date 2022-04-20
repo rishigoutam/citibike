@@ -64,12 +64,12 @@ d.d %>% Box.test(type="Ljung-Box", lag = log(length(d.d)))
 
 #_________________________________________________________________________________SARIMA 
 #_seasonal differencing 
-data %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% diff(30) %>% plot.ts(main="Seasonal 24")
+data %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% diff(24) %>% plot.ts(main="Seasonal 24")
 data %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% diff(12) %>% plot.ts(main="Seasonal 12")
 data %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% diff(6) %>% plot.ts(main="Seasonal 6")
 
+data %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% diff(24) %>% acf2(main="1Diff 24  ACF/PACF Seasonal")
 data %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% diff(23) %>% acf2(main="1Diff 23  ACF/PACF Seasonal")
-data %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% diff(23) %>% acf2(main="1Diff 24  ACF/PACF Seasonal")
 data %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% diff(12) %>% acf2(main="1Diff 12 ACF/PACF Seasonal")
 data %>% count(hour) %>% ungroup() %>% select(n) %>% ts() %>% diff(6) %>% acf2(main="1Diff 6 ACF/PACF Seasonal")
 
